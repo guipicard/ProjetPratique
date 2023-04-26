@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ee41b85b13e0b04cb50555be739894c, type: 3}
+  m_Name: CrystalsData
+  m_EditorClassIdentifier: 
+  spaceBetween: 3
+  crystalHeight: 1
+  crystalTypes:
+  - name: Red
+    crystalMineral: {fileID: 1681578067575516332, guid: e4e2cb166f47f2b41bfde5a7647d4321, type: 3}
+    crystalParts: {fileID: 7816969534138861464, guid: 01303f9773394804c9838a610dcefb44, type: 3}
+    spawnTimer: 12.5
+    aiPrefab: {fileID: 9121649056605500293, guid: 5b0ca7e5e8051c84aaa612de1e39722a, type: 3}
+    aiByCrystals: 6
+    chancesToSpawn: 6
+  - name: Green
+    crystalMineral: {fileID: 7961229374733923419, guid: 3b7553745fbe84d46a2187c66ee207bb, type: 3}
+    crystalParts: {fileID: 2837907246072525118, guid: ae87fcc3535f44f429e27a59c04eb205, type: 3}
+    spawnTimer: 12.5
+    aiPrefab: {fileID: 9121649056605500293, guid: f03c3d746b0160b47a575b81167709dc, type: 3}
+    aiByCrystals: 6
+    chancesToSpawn: 6
+  - name: Yellow
+    crystalMineral: {fileID: 3006533216290513185, guid: 0f9feb5821276144ea7473f4ff5aa23a, type: 3}
+    crystalParts: {fileID: 4628730183755553252, guid: 58336d32c0bbab04a91caf716c1a5bd5, type: 3}
+    spawnTimer: 12.5
+    aiPrefab: {fileID: 9121649056605500293, guid: 645f0015ce60b954a8bc5bafac3cdab2, type: 3}
+    aiByCrystals: 6
+    chancesToSpawn: 6
+  - name: Blue
+    crystalMineral: {fileID: 2484831086294698025, guid: d61a6cc1b858345bcb299cdecb59a6a6, type: 3}
+    crystalParts: {fileID: 8389591224910476083, guid: 36dfaf814519ddf458cd4df9d045ed6e, type: 3}
+    spawnTimer: 12.5
+    aiPrefab: {fileID: 9121649056605500293, guid: 41e9bd633343b9046a7e176b1fe966cc, type: 3}
+    aiByCrystals: 6
+    chancesToSpawn: 6
