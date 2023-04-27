@@ -2864,6 +2864,7 @@ GameObject:
   - component: {fileID: 34123677366547646}
   - component: {fileID: 3875753979658557221}
   - component: {fileID: 1127491415433642486}
+  - component: {fileID: 7662404064890120291}
   m_Layer: 7
   m_Name: Ai_Blue
   m_TagString: AiBlue
@@ -2965,10 +2966,27 @@ MonoBehaviour:
   m_Bullet: {fileID: 8139572310642796178, guid: 28b9c5ddff50469479d9e07df8e4a764, type: 3}
   m_BulletSpawner: {fileID: 6744942721304169068}
   m_DamageTag: PlayerBullet
+  m_BulletTag: Blue_Bullet
   m_TriggerDistance: 10
   m_attackDistance: 5
   m_AiCanvas: {fileID: 9035753756463547400}
   m_HealthBar: {fileID: 9035753757513807467}
+--- !u!54 &7662404064890120291
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9121649056605500293}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &3041392301597848447
 PrefabInstance:
   m_ObjectHideFlags: 0

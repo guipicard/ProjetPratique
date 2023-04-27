@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float m_Speed;
     [SerializeField] private float m_RotationSpeed;
+    [SerializeField] private float m_AttackRange;
     [SerializeField] private string m_DamageTag;
-    [SerializeField] private Transform m_Bullet;
     [SerializeField] private Transform m_BulletSpawner;
     
     private Vector3 m_Direction;
@@ -25,12 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private Quaternion targetRotation;
 
-    private bool m_Ground;
-
     private static readonly int Running = Animator.StringToHash("Running");
-    private static readonly int Jumping = Animator.StringToHash("Jumping");
-    private static readonly int JumpId = Animator.StringToHash("Jump");
-    private static readonly int Falling = Animator.StringToHash("Falling");
 
     private Camera m_MainCamera;
     private Ray m_MouseRay;
@@ -41,10 +36,12 @@ public class PlayerController : MonoBehaviour
     private float m_Distance;
 
     private GameObject m_TargetCrystal;
+    private GameObject m_TargetEnemy;
     
     public float HP = 100;
     public Canvas m_PlayerCanvas;
     [SerializeField] private Slider m_HealthBar;
+    private static readonly int Attack1 = Animator.StringToHash("Attack");
 
     void Start()
     {
@@ -55,8 +52,6 @@ public class PlayerController : MonoBehaviour
 
         targetRotation = Quaternion.identity;
 
-        m_Ground = true;
-        
         m_MainCamera = Camera.main;
 
         UpdateHealthBar();
@@ -71,7 +66,14 @@ public class PlayerController : MonoBehaviour
             {
                 if (m_HitInfo.collider.gameObject.layer == 7)
                 {
-                    Attack();
+                    m_StoppingDistance = 10.0f;
+                    m_Destination = m_HitInfo.point;
+                    m_TargetEnemy = m_HitInfo.collider.gameObject;
+                }
+                else
+                {
+                    m_TargetEnemy = null;
+                    m_StoppingDistance = 0;
                 }
 
                 if (m_HitInfo.collider.gameObject.layer == 8)
@@ -81,7 +83,6 @@ public class PlayerController : MonoBehaviour
 
                 if (m_HitInfo.collider.gameObject.layer == 6)
                 {
-                    m_StoppingDistance = 3.0f;
                     m_Destination = m_HitInfo.point;
                     m_TargetCrystal = m_HitInfo.collider.gameObject;
                 }
@@ -96,9 +97,20 @@ public class PlayerController : MonoBehaviour
         GetDirection();
         if (m_TargetCrystal != null)
         {
-            if (Vector3.Distance(transform.position, m_TargetCrystal.transform.position) <= 2.5f)
+            if (Vector3.Distance(transform.position, m_TargetCrystal.transform.position) <= 3.0f)
             {
-                Mine();
+                transform.rotation = Quaternion.LookRotation(m_Direction, Vector3.up);
+                targetRotation = transform.rotation;
+                m_StoppingDistance = Vector3.Distance(transform.position, m_TargetCrystal.transform.position);
+                m_Animator.SetTrigger("MineAnim");
+                m_TargetCrystal = null;
+            }
+        }
+        else if (m_TargetEnemy != null)
+        {
+            if (Vector3.Distance(transform.position, m_HitInfo.transform.position) <= m_AttackRange)
+            {
+                Attack();
             }
         }
     }
@@ -109,6 +121,7 @@ public class PlayerController : MonoBehaviour
         if (m_Direction != Vector3.zero)
         {
             Move();
+            targetRotation = Quaternion.LookRotation(m_Direction, Vector3.up);
             Rotate();
         }
         else
@@ -119,11 +132,12 @@ public class PlayerController : MonoBehaviour
         m_RigidBody.velocity = m_CurrentVelocity;
         Animate();
         m_PlayerCanvas.transform.LookAt(m_MainCamera.transform.position);
+        targetRotation = transform.rotation;
     }
 
     private void GetDirection()
     {
-        if (Vector3.Distance(transform.position, m_Destination) > m_StoppingDistance + 0.25f)
+        if (Vector3.Distance(transform.position, m_Destination) >= m_StoppingDistance + 0.25f)
         {
             m_Direction = (m_Destination - transform.position).normalized;
             m_Direction.y = 0;
@@ -142,8 +156,6 @@ public class PlayerController : MonoBehaviour
 
     private void Rotate()
     {
-        if (m_Direction != Vector3.zero) targetRotation = Quaternion.LookRotation(m_Direction, Vector3.up);
-
         if (transform.rotation != targetRotation)
         {
             // Slerp looks smoother than Lerp
@@ -163,7 +175,7 @@ public class PlayerController : MonoBehaviour
         {
             TakeDmg(20.0f);
             UpdateHealthBar();
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 
@@ -185,23 +197,25 @@ public class PlayerController : MonoBehaviour
     {
         HP = 0;
     }
-    
-    private void Mine()
-    {
-        m_HitInfo.collider.GetComponent<CrystalEvents>().GetMined();
-    }
-    
+
     private void Attack()
     {
         m_Destination = transform.position;
         transform.LookAt(m_HitInfo.collider.transform.position);
-        m_Animator.SetTrigger("Attack");
+        m_Animator.SetTrigger(Attack1);
+        m_TargetEnemy = null;
     }
     
     private void LaunchBasicAttack()
     {
-        Transform newBullet = Instantiate(m_Bullet);
-        newBullet.position = m_BulletSpawner.position;
-        newBullet.rotation = transform.rotation;
+        LevelManager.instance.SpawnObj("Player_Bullet", m_BulletSpawner.position, m_BulletSpawner.rotation);
+    }
+    
+    private void MineCrystal()
+    {
+        if (m_HitInfo.collider.gameObject != null && m_HitInfo.collider.gameObject.layer == 6)
+        {
+            m_HitInfo.collider.gameObject.GetComponent<CrystalEvents>().GetMined();
+        }
     }
 }

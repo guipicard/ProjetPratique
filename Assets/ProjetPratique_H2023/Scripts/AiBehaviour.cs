@@ -16,6 +16,9 @@ public class AiBehaviour : MonoBehaviour
     [SerializeField] private Transform m_Bullet;
     [SerializeField] private Transform m_BulletSpawner;
     [SerializeField] private string m_DamageTag;
+
+    [SerializeField] private string m_BulletTag;
+    
     private NavMeshAgent m_NavmeshAgent;
     private Animator m_Animator;
 
@@ -39,7 +42,6 @@ public class AiBehaviour : MonoBehaviour
         m_OutOfRange = true;
         m_HealthBar.value = HP / 100;
         m_MainCamera = Camera.main;
-        transform.parent.GetComponent<CrystalsBehaviour>().m_AiAlive++;
     }
 
     // Update is called once per frame
@@ -49,8 +51,7 @@ public class AiBehaviour : MonoBehaviour
         StateToggler();
         if (HP <= 0)
         {
-            transform.parent.GetComponent<CrystalsBehaviour>().m_AiAlive--;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         
         m_AiCanvas.transform.rotation = player.GetComponent<PlayerController>().m_PlayerCanvas.transform.rotation;
@@ -116,9 +117,7 @@ public class AiBehaviour : MonoBehaviour
     
     private void LaunchBasicAttack()
     {
-        Transform newBullet = Instantiate(m_Bullet);
-        newBullet.position = m_BulletSpawner.position;
-        newBullet.rotation = transform.rotation;
+        LevelManager.instance.SpawnObj(m_BulletTag, m_BulletSpawner.position, m_BulletSpawner.rotation);
     }
 
     private void EndAttack()
@@ -132,9 +131,9 @@ public class AiBehaviour : MonoBehaviour
         {
             HP -= 25;
             m_HealthBar.value = HP / 100;
-            if (HP > 0)
+            if (HP >= 0)
             {
-                Destroy(other.gameObject);
+                other.gameObject.SetActive(false);
             }
         }
     }

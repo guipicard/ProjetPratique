@@ -7,7 +7,13 @@ public class CrystalsBehaviour : MonoBehaviour
 {
     [SerializeField] private CrystalData m_CrystalsData;
     [SerializeField] private string m_CrystalName;
+    
+    [SerializeField] private string m_CrystalTag;
+    [SerializeField] private string m_AiTag;
+    
     private CrystalData.CrystalType m_CrystalType;
+
+    [SerializeField] private Vector3 m_InitialPosition;
 
     public List<Vector2> m_CrystalsPosition;
     public List<Vector2> m_PotentialPosition;
@@ -21,6 +27,7 @@ public class CrystalsBehaviour : MonoBehaviour
 
     void Start()
     {
+        LevelManager.instance.SpawnObj(m_CrystalTag, m_InitialPosition, Quaternion.identity);
         foreach (var type in m_CrystalsData.crystalTypes)
         {
             if (type.name == m_CrystalName)
@@ -50,6 +57,7 @@ public class CrystalsBehaviour : MonoBehaviour
         m_Elapsed += Time.deltaTime;
         if (m_Elapsed > m_CrystalType.spawnTimer)
         {
+            m_AiAlive = LevelManager.instance.GetActiveInScene(m_AiTag).Count;
             FillCrystalList();
             GetNewPositions();
             Multiply();
@@ -71,12 +79,9 @@ public class CrystalsBehaviour : MonoBehaviour
 
     private void FillCrystalList()
     {
-        foreach (Transform crystal in transform)
+        foreach (GameObject crystal in LevelManager.instance.GetActiveInScene(m_CrystalTag))
         {
-            if (crystal.CompareTag(m_CrystalType.crystalMineral.tag))
-            {
-                m_CrystalsPosition.Add(new Vector2(crystal.position.x, crystal.position.z));
-            }
+            m_CrystalsPosition.Add(new Vector2(crystal.transform.position.x, crystal.transform.position.z));
         }
     }
 
@@ -127,11 +132,12 @@ public class CrystalsBehaviour : MonoBehaviour
             {
                 if (m_HitInfo.collider.gameObject.layer == 6)
                 {
-                    Destroy(m_HitInfo.collider.gameObject);
+                    m_HitInfo.collider.gameObject.SetActive(false);
                 }
                 m_LastCrystalWave.Add(pos);
                 Vector3 newCrystalPosition = new Vector3(pos.x, m_CrystalsData.crystalHeight, pos.y);
-                Instantiate(m_CrystalType.crystalMineral, newCrystalPosition, Quaternion.identity, transform);
+                LevelManager.instance.SpawnObj(m_CrystalTag, newCrystalPosition, Quaternion.identity);
+                // Instantiate(m_CrystalType.crystalMineral, newCrystalPosition, Quaternion.identity, transform);
             }
         }
     }
@@ -141,6 +147,7 @@ public class CrystalsBehaviour : MonoBehaviour
         int spawnPointCrystalIndex = m_LastCrystalWave.Count() == 1 ? 0 : Random.Range(0, m_LastCrystalWave.Count);
         Vector2 spawnPointCrystal = m_LastCrystalWave[spawnPointCrystalIndex];
         Vector3 newAiPosition = new Vector3(spawnPointCrystal.x, m_CrystalsData.crystalHeight, spawnPointCrystal.y);
-        Instantiate(m_CrystalType.aiPrefab, newAiPosition, Quaternion.identity, transform);
+        // Instantiate(m_CrystalType.aiPrefab, newAiPosition, Quaternion.identity, transform);
+        LevelManager.instance.SpawnObj(m_AiTag, newAiPosition, Quaternion.identity);
     }
 }

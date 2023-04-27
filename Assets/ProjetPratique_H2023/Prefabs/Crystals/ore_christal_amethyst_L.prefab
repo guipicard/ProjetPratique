@@ -108,4 +108,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6955bb2f2a1eb45b8f84ffa2884ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CrystalParts: {fileID: 4628730183755553252, guid: 58336d32c0bbab04a91caf716c1a5bd5, type: 3}
+  m_PartsTag: Yellow_Crystal_Parts

@@ -2864,6 +2864,7 @@ GameObject:
   - component: {fileID: 7268014093687518234}
   - component: {fileID: 974518597153876083}
   - component: {fileID: 3240410873711460988}
+  - component: {fileID: -7613304526609986925}
   m_Layer: 7
   m_Name: Ai_Red
   m_TagString: AiRed
@@ -2965,10 +2966,27 @@ MonoBehaviour:
   m_Bullet: {fileID: 8139572310642796178, guid: 4346611f76ece424e85cb530bd016857, type: 3}
   m_BulletSpawner: {fileID: 610750603389913326}
   m_DamageTag: PlayerBullet
+  m_BulletTag: Red_Bullet
   m_TriggerDistance: 10
   m_attackDistance: 5
   m_AiCanvas: {fileID: 8569264343347131772}
   m_HealthBar: {fileID: 8569264344406935327}
+--- !u!54 &-7613304526609986925
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9121649056605500293}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &2430928402460557835
 PrefabInstance:
   m_ObjectHideFlags: 0

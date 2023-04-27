@@ -23,7 +23,7 @@ public class CrystalPartsBehaviour : MonoBehaviour
         m_Player = GameObject.FindWithTag("Player");
         heightOffset = new Vector3(0, 1, 0);
         m_InitialDirection =
-            new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(0, 1.0f), Random.Range(-1.0f, 1.0f)) *
+            new Vector3(Random.Range(-1.0f, 1.0f), 1, Random.Range(-1.0f, 1.0f)) *
             m_ExplosionForce;
         m_Rigidbody.AddForce(m_InitialDirection, ForceMode.Impulse);
         m_DirectionLerpTime = 0;
@@ -31,6 +31,7 @@ public class CrystalPartsBehaviour : MonoBehaviour
 
     void Update()
     {
+        GetComponent<BoxCollider>().isTrigger = !GetComponent<BoxCollider>().isTrigger ? true : false;
         Vector3 playerPosHeight = m_Player.transform.position + heightOffset;
         Vector3 playerPosDifference = (playerPosHeight - transform.position).normalized * m_Speed;
         if (m_DirectionLerpTime <= m_RedirectionTime)
@@ -42,13 +43,13 @@ public class CrystalPartsBehaviour : MonoBehaviour
             Vector3.Lerp(m_InitialDirection, playerPosDifference, m_DirectionLerpTime / m_RedirectionTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             // m_Player.GetComponent<PlayerController>().GetMinerals(m_Color);
-
-            Destroy(gameObject);
+            transform.parent.GetComponent<CrystalPartsDestroyer>().m_ChildCollected++;
+            gameObject.SetActive(false);
         }
     }
 }

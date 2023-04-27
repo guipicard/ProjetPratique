@@ -8,7 +8,7 @@ ModelImporter:
     second: MoveFWD_Battle_InPlace_MagicWand
   externalObjects: {}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -742,8 +742,7 @@ ModelImporter:
     hasTranslationDoF: 1
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 0308cf4e83cf517488b60af58b290fe0,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 0308cf4e83cf517488b60af58b290fe0, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1

@@ -13,8 +13,14 @@ public class BulletBehaviour : MonoBehaviour
     private Vector3 m_InitialPosition;
     private Vector3 m_DistanceDone;
     
+    
     // Start is called before the first frame update
     void Start()
+    {
+        m_InitialPosition = transform.position;
+    }
+
+    private void OnEnable()
     {
         m_InitialPosition = transform.position;
     }
@@ -26,7 +32,7 @@ public class BulletBehaviour : MonoBehaviour
         transform.Translate(Vector3.forward * m_SpeedMultiplier);
         if (Vector3.Distance(transform.position, m_InitialPosition) > m_MaxDistance)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

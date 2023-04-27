@@ -2864,6 +2864,7 @@ GameObject:
   - component: {fileID: 3379580383638346723}
   - component: {fileID: 6046228916166764939}
   - component: {fileID: 5910424657675707024}
+  - component: {fileID: 2597662750983821111}
   m_Layer: 7
   m_Name: Ai_Yellow
   m_TagString: AiYellow
@@ -2965,10 +2966,27 @@ MonoBehaviour:
   m_Bullet: {fileID: 8139572310642796178, guid: 3f69429bceaff89419a69f0eab88acb1, type: 3}
   m_BulletSpawner: {fileID: 3267930426553524299}
   m_DamageTag: PlayerBullet
+  m_BulletTag: Yellow_Bullet
   m_TriggerDistance: 10
   m_attackDistance: 5
   m_AiCanvas: {fileID: 2564829451518230576}
   m_HealthBar: {fileID: 2564829452578058835}
+--- !u!54 &2597662750983821111
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9121649056605500293}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &8415075719377712967
 PrefabInstance:
   m_ObjectHideFlags: 0
