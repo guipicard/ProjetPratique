@@ -29,6 +29,16 @@ public class CrystalPartsBehaviour : MonoBehaviour
         m_DirectionLerpTime = 0;
     }
 
+    private void OnEnable()
+    {
+        transform.position = transform.parent.position;
+        m_InitialDirection =
+            new Vector3(Random.Range(-1.0f, 1.0f), 1, Random.Range(-1.0f, 1.0f)) *
+            m_ExplosionForce;
+        m_Rigidbody.AddForce(m_InitialDirection, ForceMode.Impulse);
+        m_DirectionLerpTime = 0;
+    }
+
     void Update()
     {
         GetComponent<BoxCollider>().isTrigger = !GetComponent<BoxCollider>().isTrigger ? true : false;

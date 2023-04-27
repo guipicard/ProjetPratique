@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    private int m_GreenCollected;
-    private int m_RedCollected;
-    private int m_YellowCollected;
-    private int m_BlueCollected;
+    public int m_HiddenGreenCollected;
+    public int m_HiddenRedCollected;
+    public int m_HiddenYellowCollected;
+    public int m_HiddenBlueCollected;
+    
+    public int m_GreenCollected;
+    public int m_RedCollected;
+    public int m_YellowCollected;
+    public int m_BlueCollected;
 
     [SerializeField] private Transform m_Player;
     [SerializeField] private ObjPool m_Pools;
