@@ -52,7 +52,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Cube World Set - Proto Series\Assets\Bitgem\Cube_World\_Materials\URP_Multicolor_Material\Multicolor shader related\Editor\TextureConverter.cs" />
+     <Compile Include="Assets\BitGem\Cube_World\_Materials\URP_Multicolor_Material\Multicolor shader related\Editor\TextureConverter.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

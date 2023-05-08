@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,112 +8,58 @@ using UnityEngine.UI;
 public class UiComponents : MonoBehaviour
 {
     
-    [SerializeField] private TextMeshPro m_BlueCrystalsText;
+    [SerializeField] private TextMeshPro m_GreenCrystalsText;
     [SerializeField] private TextMeshPro m_RedCrystalsText;
     [SerializeField] private TextMeshPro m_YellowCrystalsText;
-    [SerializeField] private TextMeshPro m_GreenCrystalsText;
+    [SerializeField] private TextMeshPro m_BlueCrystalsText;
 
-    [SerializeField] private Image m_BlueCrystalImage;
+    [SerializeField] private Image m_GreenCrystalImage;
     [SerializeField] private Image m_RedCrystalImage;
     [SerializeField] private Image m_YellowCrystalImage;
-    [SerializeField] private Image m_GreenCrystalImage;
-    // Start is called before the first frame update
+    [SerializeField] private Image m_BlueCrystalImage;
+
     void Start()
     {
-        
+        LevelManager.instance.CollectAction += UpdateUi;
+        ChangeAlpha(m_GreenCrystalImage, 0.2f);
+        ChangeAlpha(m_RedCrystalImage, 0.2f);
+        ChangeAlpha(m_YellowCrystalImage, 0.2f);
+        ChangeAlpha(m_BlueCrystalImage, 0.2f);
     }
 
-    // Update is called once per frame
     void Update()
     {
       
     }
-    
-    public void GetMinerals(string color)
+
+    public void UpdateUi(string color)
     {
-        if (color == "Red")
+        int crystalAmount = LevelManager.instance.GetCollected(color);
+        switch (color)
         {
-            m_RedCrystals++;
-            if (m_RedCrystals % 2 == 0) m_RedCrystalsInventory++;
-            m_RedCrystalsText.text = m_RedCrystalsInventory.ToString();
+            case "Green":
+                m_GreenCrystalsText.text = crystalAmount.ToString();
+                ChangeAlpha(m_GreenCrystalImage, crystalAmount >= 100 ? 1.0f: 0.2f);
+                break;
+            case "Red":
+                m_RedCrystalsText.text = crystalAmount.ToString();
+                ChangeAlpha(m_RedCrystalImage, crystalAmount >= 100 ? 1.0f: 0.2f);
+                break;
+            case "Yellow":
+                m_YellowCrystalsText.text = crystalAmount.ToString();
+                ChangeAlpha(m_YellowCrystalImage, crystalAmount >= 100 ? 1.0f: 0.2f);
+                break;
+            case "Blue":
+                m_BlueCrystalsText.text = crystalAmount.ToString();
+                ChangeAlpha(m_BlueCrystalImage, crystalAmount >= 100 ? 1.0f: 0.2f);
+                break;
         }
-
-        if (color == "Green")
-        {
-            m_GreenCrystals++;
-            if (m_GreenCrystals % 2 == 0) m_GreenCrystalsInventory++;
-            m_GreenCrystalsText.text = m_GreenCrystalsInventory.ToString();
-        }
-
-        if (color == "Yellow")
-        {
-            m_YellowCrystals++;
-            if (m_YellowCrystals % 2 == 0) m_YellowCrystalsInventory++;
-            m_YellowCrystalsText.text = m_YellowCrystalsInventory.ToString();
-        }
-
-        if (color == "Blue")
-        {
-            m_BlueCrystals++;
-            if (m_BlueCrystals % 2 == 0) m_BlueCrystalsInventory++;
-            m_BlueCrystalsText.text = m_BlueCrystalsInventory.ToString();
-        }
-
-        ChangeSpellState();
     }
-    
-    private void ChangeSpellState()
+
+    private void ChangeAlpha(Image img, float alpha)
     {
-        if (LevelManager.instance.m_GreenCollected > 100)
-        {
-            Color currentColor = m_GreenCrystalImage.color;
-            currentColor.a = 1.0f;
-            m_GreenCrystalImage.color = currentColor;
-        }
-        else
-        {
-            Color currentColor = m_GreenCrystalImage.color;
-            currentColor.a = 0.2f;
-            m_GreenCrystalImage.color = currentColor;
-        }
-        
-        if (LevelManager.instance.m_RedCollected > 100)
-        {
-            Color currentColor = m_RedCrystalImage.color;
-            currentColor.a = 1.0f;
-            m_RedCrystalImage.color = currentColor;
-        }
-        else
-        {
-            Color currentColor = m_RedCrystalImage.color;
-            currentColor.a = 0.2f;
-            m_RedCrystalImage.color = currentColor;
-        }
-        
-        if (LevelManager.instance.m_YellowCollected > 100)
-        {
-            Color currentColor = m_YellowCrystalImage.color;
-            currentColor.a = 1.0f;
-            m_YellowCrystalImage.color = currentColor;
-        }
-        else
-        {
-            Color currentColor = m_YellowCrystalImage.color;
-            currentColor.a = 0.2f;
-            m_YellowCrystalImage.color = currentColor;
-        }
-        
-        if (LevelManager.instance.m_BlueCollected > 100)
-        {
-            Color currentColor = m_BlueCrystalImage.color;
-            currentColor.a = 1.0f;
-            m_BlueCrystalImage.color = currentColor;
-        }
-        else
-        {
-            Color currentColor = m_BlueCrystalImage.color;
-            currentColor.a = 0.2f;
-            m_BlueCrystalImage.color = currentColor;
-        }
+        Color currentColor = img.color;
+        currentColor.a = alpha;
+        img.color = currentColor;
     }
 }

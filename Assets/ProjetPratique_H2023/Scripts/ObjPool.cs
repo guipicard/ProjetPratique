@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class ObjPool : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class ObjPool : MonoBehaviour
             List<GameObject> newList = new List<GameObject>();
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab, Vector3.zero, Quaternion.identity, pool.parent);
+                GameObject obj = Instantiate(pool.prefab, Vector3.zero, Quaternion.identity, pool.parent.Find("Inactive"));
                 obj.SetActive(false);
                 newList.Add(obj);
             }
@@ -52,7 +53,7 @@ public class ObjPool : MonoBehaviour
         {
             if (pool.tag == listName)
             {
-                newObj = Instantiate(pool.prefab);
+                newObj = Instantiate(pool.prefab, Vector3.zero, Quaternion.identity, pool.parent.Find("Inactive"));
             }
         }
         newObj.SetActive(false);
@@ -60,10 +61,10 @@ public class ObjPool : MonoBehaviour
         return newObj;
     }
 
-    public List<GameObject> GetActive(string tag)
+    public List<GameObject> GetActive(string _tag)
     {
         List<GameObject> objList = new List<GameObject>();
-        foreach (var obj in PoolsDictionary[tag])
+        foreach (var obj in PoolsDictionary[_tag])
         {
             if (obj.activeSelf) objList.Add(obj);
         }

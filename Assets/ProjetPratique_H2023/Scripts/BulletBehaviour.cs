@@ -32,7 +32,7 @@ public class BulletBehaviour : MonoBehaviour
         transform.Translate(Vector3.forward * m_SpeedMultiplier);
         if (Vector3.Distance(transform.position, m_InitialPosition) > m_MaxDistance)
         {
-            gameObject.SetActive(false);
+            LevelManager.instance.ToggleInactive(gameObject);
         }
     }
 }

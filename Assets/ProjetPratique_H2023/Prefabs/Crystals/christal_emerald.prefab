@@ -24,7 +24,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691696896026138725}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.8640137, y: 0.32665876, z: 0.3449182}
@@ -69,7 +69,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2096552155718116612}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6946691, y: 0.39839378, z: 0.42767823}
@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9aa810437ee9644ad86785433806f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ChildCollected: 0
 --- !u!54 &1367425563687415533
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -165,7 +166,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4484835758485013403}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.0990417, y: 0.31949672, z: 0.33677977}
@@ -210,7 +211,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4927837696827168530}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.34305176, y: 0.26152918, z: 0.27940673}
@@ -255,7 +256,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5808636332383173720}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6750134, y: 0.29587546, z: 0.31250733}
@@ -300,7 +301,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5832059927926080526}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.47988522, y: 0.4858338, z: 0.48900634}
@@ -345,7 +346,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6842763979823255335}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.64690304, y: 0.34122276, z: 0.35882935}
@@ -390,7 +391,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8082822530873994482}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6429467, y: 0.22773562, z: 0.24564819}
@@ -466,6 +467,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: christal_emerald_7
       objectReference: {fileID: 0}
+    - target: {fileID: 5454779098068399947, guid: 64439265bfae949919ff02cd6ca61b3e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5454779098068399947, guid: 64439265bfae949919ff02cd6ca61b3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5815194680018081438, guid: 64439265bfae949919ff02cd6ca61b3e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -496,6 +505,14 @@ PrefabInstance:
     - target: {fileID: 1445808272889617227, guid: 56e004e08e1c0443095fc854468962d1, type: 3}
       propertyPath: m_Name
       value: christal_emerald_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445808272889617227, guid: 56e004e08e1c0443095fc854468962d1, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445808272889617227, guid: 56e004e08e1c0443095fc854468962d1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2259498982199280113, guid: 56e004e08e1c0443095fc854468962d1, type: 3}
       propertyPath: m_RootOrder
@@ -567,6 +584,14 @@ PrefabInstance:
     - target: {fileID: 3742386262860590587, guid: 848dc174f458242c4b5cf762dec9cb46, type: 3}
       propertyPath: m_Name
       value: christal_emerald_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742386262860590587, guid: 848dc174f458242c4b5cf762dec9cb46, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742386262860590587, guid: 848dc174f458242c4b5cf762dec9cb46, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4081511230901794625, guid: 848dc174f458242c4b5cf762dec9cb46, type: 3}
       propertyPath: m_RootOrder
@@ -679,6 +704,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: christal_emerald_8
       objectReference: {fileID: 0}
+    - target: {fileID: 7750670053505316366, guid: 817b802e5244a47c8928716ff2cc66cc, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750670053505316366, guid: 817b802e5244a47c8928716ff2cc66cc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8110724721783248859, guid: 817b802e5244a47c8928716ff2cc66cc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -754,6 +787,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: christal_emerald_4
       objectReference: {fileID: 0}
+    - target: {fileID: 2286616640665970345, guid: 97789a1ae14cb4953b88ea6202937c7f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286616640665970345, guid: 97789a1ae14cb4953b88ea6202937c7f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97789a1ae14cb4953b88ea6202937c7f, type: 3}
 --- !u!4 &6178289123561067933 stripped
@@ -821,6 +862,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: christal_emerald_2
       objectReference: {fileID: 0}
+    - target: {fileID: 7816677344748982885, guid: 58095a4c0c6c044e29a37238f163cfdc, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7816677344748982885, guid: 58095a4c0c6c044e29a37238f163cfdc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8609359463661761456, guid: 58095a4c0c6c044e29a37238f163cfdc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -851,6 +900,14 @@ PrefabInstance:
     - target: {fileID: 1659423435764806798, guid: 1d778a8849eef40bf8915946b7f01676, type: 3}
       propertyPath: m_Name
       value: christal_emerald_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659423435764806798, guid: 1d778a8849eef40bf8915946b7f01676, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659423435764806798, guid: 1d778a8849eef40bf8915946b7f01676, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2039185593405566516, guid: 1d778a8849eef40bf8915946b7f01676, type: 3}
       propertyPath: m_RootOrder
@@ -966,6 +1023,14 @@ PrefabInstance:
     - target: {fileID: 4324475362501689546, guid: 824407701436a4e15b814ef4c3cb2f62, type: 3}
       propertyPath: m_Name
       value: christal_emerald_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324475362501689546, guid: 824407701436a4e15b814ef4c3cb2f62, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324475362501689546, guid: 824407701436a4e15b814ef4c3cb2f62, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 824407701436a4e15b814ef4c3cb2f62, type: 3}

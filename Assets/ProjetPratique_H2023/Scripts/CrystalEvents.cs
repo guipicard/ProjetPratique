@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CrystalEvents : MonoBehaviour
 {
+    [SerializeField] private string m_CrystalTag;
     [SerializeField] private string m_PartsTag;
 
     private CrystalsBehaviour m_CrystalsBehaviour;
@@ -17,7 +18,7 @@ public class CrystalEvents : MonoBehaviour
     public void GetMined()
     {
         LevelManager.instance.SpawnObj(m_PartsTag, transform.position, Quaternion.identity);
-        // Destroy(gameObject);
-        gameObject.SetActive(false);
+        LevelManager.instance.ToggleInactive(gameObject);
+        LevelManager.instance.UpdateCrystalNums(m_CrystalTag);
     }
 }

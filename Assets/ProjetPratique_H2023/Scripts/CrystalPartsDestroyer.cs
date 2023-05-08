@@ -17,6 +17,7 @@ public class CrystalPartsDestroyer : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(true);
+            transform.GetChild(i).gameObject.GetComponent<CrystalPartsBehaviour>().Explode();
         }
 
         m_ChildCollected = 0;
@@ -27,7 +28,7 @@ public class CrystalPartsDestroyer : MonoBehaviour
     {
         if (m_ChildCollected == 8)
         {
-            gameObject.SetActive(false);
+            LevelManager.instance.ToggleInactive(gameObject);
         }
     }
 }

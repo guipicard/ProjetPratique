@@ -51,7 +51,7 @@ public class AiBehaviour : MonoBehaviour
         StateToggler();
         if (HP <= 0)
         {
-            gameObject.SetActive(false);
+            LevelManager.instance.ToggleInactive(gameObject);
         }
         
         m_AiCanvas.transform.rotation = player.GetComponent<PlayerController>().m_PlayerCanvas.transform.rotation;
@@ -129,11 +129,11 @@ public class AiBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag(m_DamageTag))
         {
-            HP -= 25;
+            HP -= LevelManager.instance.playerDamage;
             m_HealthBar.value = HP / 100;
             if (HP >= 0)
             {
-                other.gameObject.SetActive(false);
+                LevelManager.instance.ToggleInactive(other.gameObject);
             }
         }
     }

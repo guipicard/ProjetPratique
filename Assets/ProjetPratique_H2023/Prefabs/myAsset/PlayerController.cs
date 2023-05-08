@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
     private GameObject m_TargetCrystal;
     private GameObject m_TargetEnemy;
     
-    public float HP = 100;
     public Canvas m_PlayerCanvas;
     [SerializeField] private Slider m_HealthBar;
     private static readonly int Attack1 = Animator.StringToHash("Attack");
@@ -59,7 +58,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        UpdateHealthBar();
+        if (Input.GetMouseButtonDown(1))
         {
             m_MouseRay = m_MainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(m_MouseRay, out m_HitInfo))
@@ -174,20 +174,23 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag(m_DamageTag))
         {
             TakeDmg(20.0f);
-            UpdateHealthBar();
-            other.gameObject.SetActive(false);
+            LevelManager.instance.ToggleInactive(other.gameObject);
+        }
+        else if (other.gameObject.layer == 9)
+        {
+            LevelManager.instance.CollectAction?.Invoke(other.gameObject.GetComponent<CrystalPartsBehaviour>().m_Color);   
         }
     }
 
     private void UpdateHealthBar()
     {
-        m_HealthBar.value = HP / 100;
+        m_HealthBar.value = LevelManager.instance.playerHp / 100;
     }
     
     public void TakeDmg(float damage)
     {
-        HP -= damage;
-        if (HP <= 0)
+        LevelManager.instance.playerHp -= damage;
+        if (LevelManager.instance.playerHp <= 0)
         {
             Death();
         }
@@ -195,7 +198,7 @@ public class PlayerController : MonoBehaviour
     
     private void Death()
     {
-        HP = 0;
+        LevelManager.instance.playerHp = 0;
     }
 
     private void Attack()

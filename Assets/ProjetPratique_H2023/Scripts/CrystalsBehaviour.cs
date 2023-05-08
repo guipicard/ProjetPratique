@@ -5,45 +5,56 @@ using UnityEngine;
 
 public class CrystalsBehaviour : MonoBehaviour
 {
-    [SerializeField] private CrystalData m_CrystalsData;
     [SerializeField] private string m_CrystalName;
-    
     [SerializeField] private string m_CrystalTag;
     [SerializeField] private string m_AiTag;
-    
-    private CrystalData.CrystalType m_CrystalType;
-
     [SerializeField] private Vector3 m_InitialPosition;
 
-    public List<Vector2> m_CrystalsPosition;
-    public List<Vector2> m_PotentialPosition;
+    public HashSet<Vector2> m_CrystalsPosition;
+    public HashSet<Vector2> m_PotentialPosition;
     public List<Vector2> m_LastCrystalWave;
 
     private float m_Elapsed;
     private Ray m_Ray;
     private RaycastHit m_HitInfo;
-    public int m_AiAlive;
+
+    public int m_AiActive;
+    public int m_CrystalActive;
+    private float m_CrystalHeight;
+    private float CrystalSpacing;
+    private Vector2[] m_SurroundOffsets;
 
 
     void Start()
     {
-        LevelManager.instance.SpawnObj(m_CrystalTag, m_InitialPosition, Quaternion.identity);
-        foreach (var type in m_CrystalsData.crystalTypes)
+        CrystalSpacing = LevelManager.instance.m_CrystalSpaceBetween;
+        m_CrystalHeight = m_InitialPosition.y;
+        m_SurroundOffsets = new Vector2[4]
         {
-            if (type.name == m_CrystalName)
-            {
-                m_CrystalType = type;
-            }
-        }
+            new Vector2(CrystalSpacing, CrystalSpacing),
+            new Vector2(-CrystalSpacing, CrystalSpacing),
+            new Vector2(CrystalSpacing, -CrystalSpacing),
+            new Vector2(-CrystalSpacing, -CrystalSpacing)
+        };
 
-        m_AiAlive = 0;
+        m_Ray = new Ray();
+        m_Ray.direction = Vector3.down;
+
+        LevelManager.instance.SpawnObj(m_CrystalTag, m_InitialPosition, Quaternion.identity);
+
+        m_AiActive = 0;
+        m_CrystalActive = 1;
         m_Elapsed = 0;
 
-        m_PotentialPosition = new List<Vector2>();
-        m_CrystalsPosition = new List<Vector2>();
+        m_PotentialPosition = new HashSet<Vector2>();
+        m_CrystalsPosition = new HashSet<Vector2>();
         // Add All Present Crystals Positions in List "CrystalsPosition"
         FillCrystalList();
-        m_LastCrystalWave = m_CrystalsPosition;
+        foreach (var pos in m_CrystalsPosition)
+        {
+            m_LastCrystalWave.Add(pos);
+        }
+
         SpawnAi();
     }
 
@@ -55,26 +66,26 @@ public class CrystalsBehaviour : MonoBehaviour
     private void CrystalDuplicationLoop()
     {
         m_Elapsed += Time.deltaTime;
-        if (m_Elapsed > m_CrystalType.spawnTimer)
+        if (m_Elapsed > LevelManager.instance.m_CrystalSpawnTimer)
         {
-            m_AiAlive = LevelManager.instance.GetActiveInScene(m_AiTag).Count;
+            m_AiActive = LevelManager.instance.GetActiveInScene(m_AiTag).Count;
+            m_CrystalActive = LevelManager.instance.UpdateCrystalNums(m_CrystalTag);
             FillCrystalList();
             GetNewPositions();
             Multiply();
-            if (m_AiAlive < (m_CrystalsPosition.Count / m_CrystalType.aiByCrystals) + 1 &&
-                m_CrystalsPosition.Count > m_CrystalType.aiByCrystals)
+            m_CrystalActive = LevelManager.instance.UpdateCrystalNums(m_CrystalTag);
+            if (m_AiActive < 1 || m_AiActive + 1 <= (m_CrystalActive / LevelManager.instance.m_AiByCrystals) + 1)
             {
                 SpawnAi();
             }
-            
+
+
             // Reset Lists
-            m_PotentialPosition = new List<Vector2>();
-            m_CrystalsPosition = new List<Vector2>();
-            m_LastCrystalWave = new List<Vector2>();
-            
+            m_PotentialPosition.Clear();
+            m_CrystalsPosition.Clear();
+
             m_Elapsed = 0;
         }
-        
     }
 
     private void FillCrystalList()
@@ -88,32 +99,17 @@ public class CrystalsBehaviour : MonoBehaviour
     private void GetNewPositions()
     {
         // Add All Potential Places a new Crystal could be
-        for (int i = m_CrystalsPosition.Count - 1; i >= 0; i--)
-        {
-            Vector2 currentCrystal = m_CrystalsPosition[i];
-            float CrystalSpacing = m_CrystalsData.spaceBetween;
-            Vector2[] surroundingPlacings =
-            {
-                currentCrystal + new Vector2(m_CrystalsData.spaceBetween, m_CrystalsData.spaceBetween),
-                currentCrystal + new Vector2(-m_CrystalsData.spaceBetween, m_CrystalsData.spaceBetween),
-                currentCrystal + new Vector2(m_CrystalsData.spaceBetween, -m_CrystalsData.spaceBetween),
-                currentCrystal + new Vector2(-m_CrystalsData.spaceBetween, -m_CrystalsData.spaceBetween)
-            };
 
-            for (int j = surroundingPlacings.Length - 1; j >= 0; j--)
+        foreach (var pos in m_CrystalsPosition)
+        {
+            for (int j = m_SurroundOffsets.Length - 1; j >= 0; j--)
             {
-                if (!m_PotentialPosition.Contains(surroundingPlacings[j]))
+                Vector2 m_currentPosition = m_SurroundOffsets[j] + pos;
+
+                m_Ray.origin = new Vector3(m_currentPosition.x, m_CrystalHeight + 2.0f, m_currentPosition.y);
+                if (Physics.Raycast(m_Ray, out m_HitInfo, Mathf.Infinity))
                 {
-                    m_Ray = new Ray(
-                        new Vector3(surroundingPlacings[j].x, m_CrystalsData.crystalHeight + 2.0f,
-                            surroundingPlacings[j].y), Vector3.down);
-                    if (Physics.Raycast(m_Ray, out m_HitInfo, Mathf.Infinity))
-                    {
-                        if (m_HitInfo.collider.CompareTag("Ground") || m_HitInfo.collider.gameObject.layer == 6)
-                        {
-                            m_PotentialPosition.Add(surroundingPlacings[j]);
-                        }
-                    }
+                    m_PotentialPosition.Add(m_currentPosition);
                 }
             }
         }
@@ -122,32 +118,50 @@ public class CrystalsBehaviour : MonoBehaviour
     private void Multiply()
     {
         // Create New Crystals
+        HashSet<Vector2> newWave = new HashSet<Vector2>();
         foreach (Vector2 pos in m_PotentialPosition)
         {
-            int chances = Random.Range(0, 5);
+            var chances = Random.Range(0, 5);
 
-            m_Ray = new Ray(new Vector3(pos.x, m_CrystalsData.crystalHeight + 2.0f, pos.y), Vector3.down);
-            bool myRaycast = Physics.Raycast(m_Ray, out m_HitInfo, Mathf.Infinity);
+            m_Ray = new Ray(new Vector3(pos.x, m_CrystalHeight + 2.0f, pos.y), Vector3.down);
+            var myRaycast = Physics.Raycast(m_Ray, out m_HitInfo, Mathf.Infinity);
             if (chances == 1 && myRaycast)
             {
                 if (m_HitInfo.collider.gameObject.layer == 6)
                 {
-                    m_HitInfo.collider.gameObject.SetActive(false);
+                    var hitObj = m_HitInfo.collider.transform.parent.parent.gameObject;
+                    int hitActiveInSceneCount = hitObj.GetComponent<CrystalsBehaviour>().m_CrystalActive;
+                    var hasMoreCrystals = m_CrystalActive > hitActiveInSceneCount;
+                    if (hasMoreCrystals)
+                    {
+                        LevelManager.instance.ToggleInactive(m_HitInfo.collider.gameObject);
+                        newWave.Add(pos);
+                        Vector3 newPos = new Vector3(pos.x, m_CrystalHeight, pos.y);
+                        LevelManager.instance.SpawnObj(m_CrystalTag, newPos, Quaternion.identity);
+                    }
+
+                    continue;
                 }
-                m_LastCrystalWave.Add(pos);
-                Vector3 newCrystalPosition = new Vector3(pos.x, m_CrystalsData.crystalHeight, pos.y);
+
+                newWave.Add(pos);
+                var newCrystalPosition = new Vector3(pos.x, m_CrystalHeight, pos.y);
                 LevelManager.instance.SpawnObj(m_CrystalTag, newCrystalPosition, Quaternion.identity);
-                // Instantiate(m_CrystalType.crystalMineral, newCrystalPosition, Quaternion.identity, transform);
             }
         }
+
+        if (newWave.Count > 0)
+        {
+            m_LastCrystalWave = newWave.ToList();
+        }
     }
-    
+
     private void SpawnAi()
     {
-        int spawnPointCrystalIndex = m_LastCrystalWave.Count() == 1 ? 0 : Random.Range(0, m_LastCrystalWave.Count);
+        int spawnPointCrystalIndex = m_LastCrystalWave.Count == 1 ? 0 : Random.Range(0, m_LastCrystalWave.Count);
         Vector2 spawnPointCrystal = m_LastCrystalWave[spawnPointCrystalIndex];
-        Vector3 newAiPosition = new Vector3(spawnPointCrystal.x, m_CrystalsData.crystalHeight, spawnPointCrystal.y);
-        // Instantiate(m_CrystalType.aiPrefab, newAiPosition, Quaternion.identity, transform);
+        Vector2 spawnPointOffset = new Vector2(m_InitialPosition.x - spawnPointCrystal.y, m_InitialPosition.z - spawnPointCrystal.y).normalized;
+        Vector2 spawnPointAi = spawnPointCrystal - spawnPointOffset;
+        Vector3 newAiPosition = new Vector3(spawnPointAi.x, m_CrystalHeight, spawnPointAi.y);
         LevelManager.instance.SpawnObj(m_AiTag, newAiPosition, Quaternion.identity);
     }
 }

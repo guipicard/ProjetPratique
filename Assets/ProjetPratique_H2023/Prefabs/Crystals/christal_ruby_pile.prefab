@@ -24,7 +24,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293248751521230947}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6946691, y: 0.39839378, z: 0.42767823}
@@ -69,7 +69,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4020641380647990534}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6429467, y: 0.22773562, z: 0.24564819}
@@ -114,7 +114,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5691475488244325638}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.34305176, y: 0.26152918, z: 0.27940673}
@@ -159,7 +159,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6595889914058100263}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.47988522, y: 0.4858338, z: 0.48900634}
@@ -204,7 +204,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7051893939876506350}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.8640137, y: 0.32665876, z: 0.3449182}
@@ -249,7 +249,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7222066018653650280}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.0990417, y: 0.31949672, z: 0.33677977}
@@ -294,7 +294,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7797350238285855612}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.64690304, y: 0.34122276, z: 0.35882935}
@@ -366,6 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9aa810437ee9644ad86785433806f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ChildCollected: 0
 --- !u!54 &1807969467186013315
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -390,7 +391,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8069133929793724226}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6750134, y: 0.29587546, z: 0.31250733}
@@ -421,6 +422,14 @@ PrefabInstance:
     - target: {fileID: 7423288097244784290, guid: 96f5f6915b5554f8a8a644671a8285ab, type: 3}
       propertyPath: m_Name
       value: christal_ruby_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423288097244784290, guid: 96f5f6915b5554f8a8a644671a8285ab, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423288097244784290, guid: 96f5f6915b5554f8a8a644671a8285ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7804458453868051480, guid: 96f5f6915b5554f8a8a644671a8285ab, type: 3}
       propertyPath: m_RootOrder
@@ -537,6 +546,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: christal_ruby_8
       objectReference: {fileID: 0}
+    - target: {fileID: 7764872081965141595, guid: f3ba24c6b915943939b6f4726cc0cdc8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764872081965141595, guid: f3ba24c6b915943939b6f4726cc0cdc8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8125235299200462734, guid: f3ba24c6b915943939b6f4726cc0cdc8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -563,6 +580,14 @@ PrefabInstance:
     - target: {fileID: 2368829544780144302, guid: b6539747d9eb748c5872bbcb3be9a694, type: 3}
       propertyPath: m_Name
       value: christal_ruby_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368829544780144302, guid: b6539747d9eb748c5872bbcb3be9a694, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368829544780144302, guid: b6539747d9eb748c5872bbcb3be9a694, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3140158234948682772, guid: b6539747d9eb748c5872bbcb3be9a694, type: 3}
       propertyPath: m_RootOrder
@@ -683,6 +708,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: christal_ruby_4
       objectReference: {fileID: 0}
+    - target: {fileID: 4197979674132876473, guid: c7f9a45717bcb401f8d8441e836fd68d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197979674132876473, guid: c7f9a45717bcb401f8d8441e836fd68d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7f9a45717bcb401f8d8441e836fd68d, type: 3}
 --- !u!4 &7457415721205998022 stripped
@@ -750,6 +783,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: christal_ruby_6
       objectReference: {fileID: 0}
+    - target: {fileID: 1105276517578231520, guid: 1360b917098ea4874bc6f9eeb1aac576, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1105276517578231520, guid: 1360b917098ea4874bc6f9eeb1aac576, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1465437151477591861, guid: 1360b917098ea4874bc6f9eeb1aac576, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -776,6 +817,14 @@ PrefabInstance:
     - target: {fileID: 7302973938685803918, guid: d78a7ecf076ec48f9bfb097e5f9e3413, type: 3}
       propertyPath: m_Name
       value: christal_ruby_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302973938685803918, guid: d78a7ecf076ec48f9bfb097e5f9e3413, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302973938685803918, guid: d78a7ecf076ec48f9bfb097e5f9e3413, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7931596190053639988, guid: d78a7ecf076ec48f9bfb097e5f9e3413, type: 3}
       propertyPath: m_RootOrder
@@ -892,6 +941,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: christal_ruby_7
       objectReference: {fileID: 0}
+    - target: {fileID: 3370117681470738824, guid: 8290b479069384d9aaa6df21a0e1e94d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370117681470738824, guid: 8290b479069384d9aaa6df21a0e1e94d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3874762937557856349, guid: 8290b479069384d9aaa6df21a0e1e94d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -962,6 +1019,14 @@ PrefabInstance:
     - target: {fileID: 5318209910422777210, guid: d34c12969a7c743b5aabe4e6ce5c73e2, type: 3}
       propertyPath: m_Name
       value: christal_ruby_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318209910422777210, guid: d34c12969a7c743b5aabe4e6ce5c73e2, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318209910422777210, guid: d34c12969a7c743b5aabe4e6ce5c73e2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5966970218736094383, guid: d34c12969a7c743b5aabe4e6ce5c73e2, type: 3}
       propertyPath: m_Materials.Array.data[0]
